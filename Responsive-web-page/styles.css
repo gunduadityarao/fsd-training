@@ -1,0 +1,305 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+header{
+    background:#333;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.section-title{
+    text-align:center;
+    margin:30px 0;
+}
+
+nav{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    background:darkblue;
+    padding:15px;
+}
+
+.logo{
+    color:white;
+    font-weight:bold;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:all 0.5s;
+}
+
+nav a:hover{
+    color:yellow;
+    font-size:20px;
+    text-decoration:underline;
+}
+
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    padding:20px;
+}
+
+.profile-card{
+    width:500px;
+    display:flex;
+    border-radius:10px;
+    box-shadow:0px 2px 8px gray;
+    overflow:hidden;
+    transition:all 0.5s;
+}
+
+.profile-card:hover{
+    transform:scale(1.05);
+}
+
+.profile-card img{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    transition:all 0.5s;
+}
+
+.profile-card img:hover{
+    transform:scale(1.2);
+}
+
+.details{
+    padding:20px;
+}
+
+.gallery{
+    width:90%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.gallery img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.dashboard{
+    display:flex;
+    margin:30px;
+    gap:20px;
+}
+
+aside{
+    width:25%;
+    background:orange;
+    padding:20px;
+    border:0px;
+    box-shadow: 0px 2px 4px black;
+    height:auto;
+}
+
+main{
+    width:75%;
+    background:lightblue;
+    padding:20px;
+    border:0px;
+    box-shadow: 0px 2px 4px black;
+    height:auto;
+}
+
+.center{
+    text-align:center;
+}
+
+button{
+    padding:15px 30px;
+    border:none;
+    border-radius:10px;
+    background:blue;
+    color:white;
+    transition:all 0.5s;
+}
+
+button:hover{
+    background:green;
+    transform:scale(1.1);
+}
+
+.spinner{
+    width:70px;
+    height:70px;
+    border:8px solid lightgray;
+    border-top:8px solid blue;
+    border-radius:50%;
+    margin:20px auto;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.ball-container{
+    width:90%;
+    height:80px;
+    margin:auto;
+}
+
+.ball{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:red;
+    position:relative;
+    animation:move 3s infinite alternate;
+}
+
+@keyframes move{
+    from{
+        left:0;
+    }
+    to{
+        left:90%;
+    }
+}
+
+.bounce{
+    text-align:center;
+    font-size:40px;
+    font-weight:bold;
+}
+
+.bounce span{
+    display:inline-block;
+    animation:bounce 0.8s infinite alternate;
+}
+
+.bounce span:nth-child(2){animation-delay:0.1s;}
+.bounce span:nth-child(3){animation-delay:0.2s;}
+.bounce span:nth-child(4){animation-delay:0.3s;}
+.bounce span:nth-child(5){animation-delay:0.4s;}
+.bounce span:nth-child(6){animation-delay:0.5s;}
+.bounce span:nth-child(7){animation-delay:0.6s;}
+
+@keyframes bounce{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-20px);
+    }
+}
+
+.signal{
+    width:120px;
+    background:black;
+    padding:20px;
+    margin:30px auto;
+    border-radius:10px;
+}
+
+.light{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    margin:15px auto;
+}
+
+.red{
+    animation:redlight 6s infinite;
+}
+
+.yellow{
+    animation:yellowlight 6s infinite;
+}
+
+.green{
+    animation:greenlight 6s infinite;
+}
+
+@keyframes redlight{
+    0%,33%{
+        background:red;
+    }
+    34%,100%{
+        background:gray;
+    }
+}
+
+@keyframes yellowlight{
+    34%,66%{
+        background:yellow;
+    }
+    0%,33%,67%,100%{
+        background:gray;
+    }
+}
+
+@keyframes greenlight{
+    67%,100%{
+        background:green;
+    }
+    0%,66%{
+        background:gray;
+    }
+}
+
+@media (max-width:768px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .profile-card{
+        flex-direction:column;
+        width:90%;
+    }
+
+    .profile-card img{
+        width:100%;
+    }
+
+    aside{
+        display:none;
+    }
+
+    main{
+        width:100%;
+    }
+}
+
+@media (max-width:576px){
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    nav a{
+        width:100%;
+        text-align:center;
+        padding:10px;
+    }
+
+    .profile-card{
+        width:100%;
+    }
+}
