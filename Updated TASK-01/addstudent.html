@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <script>
+        function addstudent(){
+            
+        let name=document.getElementById('name').value;
+        let rollno=document.getElementById('rollno').value;
+        let cgpa=document.getElementById('cgpa').value;
+        let branch=document.getElementById('branch').value;
+        
+            let obj={
+            "name":name,
+            "rollno":rollno,
+            "cgpa":cgpa,
+            "branch":branch
+        }
+        let students=(JSON.parse(localStorage.getItem('student'))) || [] ;
+        students.push(obj);
+        localStorage.setItem('student',JSON.stringify(students));
+        }
+       
+
+    </script>
+</head>
+<body>
+    <header>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>    
+        <a href="addstudent.html">Add Student</a>    
+        <a href="viewstudents.html">View Students</a>     
+        <a href="logout.html">Logout</a>    
+    </nav>
+    </header>
+    <h1>Add Student</h1><hr>
+    <form action="viewstudents.html" class="form">
+    <label for="username">Name: </label>
+    <input type="text" name="name" placeholder="Enter name" id="name" required/><br><br>
+    <label for="rollno">Roll No: </label>
+    <input type="text" name="rollno" placeholder="Enter Roll No" id="rollno" required/><br><br>
+    <label for="cgpa">CGPA: </label>
+    <input type="number" name="cgpa" placeholder="Enter CGPA" id="cgpa" required/><br><br>
+    <label for="branch">Branch: </label>
+    <input type="text" name="branch" placeholder="Enter Branch" id="branch" required/><br><br>
+    <button type="submit" onclick="addstudent()">Add Student</button>
+    
+    </form>
+</body>
+</html>

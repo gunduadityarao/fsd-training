@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <style>
+        table{
+            border-collapse: collapse;
+            font-size: 18px;
+            margin-top: 70px;
+        }
+        td{
+            padding:3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+        <a href="dashboard.html">Dashboard</a>    
+        <a href="addstudent.html">Add Student</a>    
+        <a href="viewstudents.html">View Students</a>     
+        <a href="logout.html">Logout</a>    
+    </nav>
+    </header>
+    
+    <h1>View Students</h1>
+    <hr>
+    <div style="margin-left: 500px;">
+    <table style="width:500px; border: 1px solid black;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rollno</th>
+                <th>CGPA</th>
+                <th>Branch</th>
+                <th></th>
+            </tr>
+            
+        </thead>
+        <tbody id="tbody">
+            
+ 
+        </tbody>
+    </table>
+    </div>
+    <script>
+    let students = JSON.parse(localStorage.getItem('student')) || [];
+
+    let tbody = document.getElementById('tbody');
+
+    tbody.innerHTML = students.map((s, index) => `
+        <tr>
+            <td>${s.name}</td>
+            <td>${s.rollno}</td>
+            <td>${s.cgpa}</td>
+            <td>${s.branch}</td>
+            <td>
+                <a href="editvalue.html" onclick="editvalue(${index})">
+                    Edit
+                </a>
+            </td>
+        </tr>
+    `).join('');
+
+    function editvalue(index) {
+        localStorage.setItem('editindex', index);
+    }
+</script>
+</body>
+</html>

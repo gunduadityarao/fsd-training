@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <header>
+    <nav>
+        <a href="index.html">Home</a>     <a href="login.html">Login</a>     <a href="register.html">Register</a>    
+    </nav>
+    </header>
+    <h1>Register Page</h1>
+    <hr>
+    <br>
+    <form action="login.html" class="form">
+    <label for="username">Username: </label>
+    <input type="text" name="username" placeholder="Enter Username" id="username" required/><br><br>
+    <label for="password">Password: </label>
+    <input type="password" name="password" placeholder="Enter Password" id="password" required/><br><br>
+    <label for="confirmpassword">Confirm Password: </label>
+    <input type="password" name="confirmpassword" placeholder="Enter Password again" id="confirmpass" required/><br><br>
+    <button type="submit" onclick="register()">register</button><br><br>
+    <small>
+        Already have an account? <a href="login.html">Back to Login</a>
+    </small>
+    </form>
+    <script>
+        function register(){
+        let username=document.querySelector('#username').value;
+        let password=document.querySelector('#password').value;
+        let confirmpass=document.querySelector('#confirmpass').value;
+
+        if(password!=confirmpass){
+            alert('passwords do not match');
+            return;
+        }
+
+        let obj={
+            "username":username,
+            "password":password,
+            "confirmpass":confirmpass
+        }
+            localStorage.setItem('user',JSON.stringify(obj));
+        }
+    </script>
+</body>
+</html>

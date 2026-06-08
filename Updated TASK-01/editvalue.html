@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <header>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>    
+        <a href="addstudent.html">Add Student</a>    
+        <a href="viewstudents.html">View Students</a>     
+        <a href="logout.html">Logout</a>    
+    </nav>
+    </header>
+    
+    <h1>Edit Details</h1><hr>
+    <form action="dashboard.html" class="form">
+    <label for="username">Name: </label>
+    <input type="text" name="name" id="name" required/><br><br>
+    <label for="rollno">Roll No: </label>
+    <input type="text" name="rollno" id="rollno" required/><br><br>
+    <label for="cgpa">CGPA: </label>
+    <input type="number" name="cgpa" id="cgpa" required/><br><br>
+    <label for="branch">Branch: </label>
+    <input type="text" name="branch" id="branch" required/><br><br>
+    <button type="button" onclick="update()">Update</button>
+    </form>
+    <script>
+       
+        
+
+        
+    
+    let students = JSON.parse(localStorage.getItem('student')) || [];
+    let index = Number(localStorage.getItem('editindex'));
+
+    let student = students[index];
+
+    document.getElementById('name').value = student.name;
+    document.getElementById('rollno').value = student.rollno;
+    document.getElementById('cgpa').value = student.cgpa;
+    document.getElementById('branch').value = student.branch;
+
+    function update() {
+        students[index] = {
+            name: document.getElementById('name').value,
+            rollno: document.getElementById('rollno').value,
+            cgpa: document.getElementById('cgpa').value,
+            branch: document.getElementById('branch').value
+        };
+
+        localStorage.setItem('student', JSON.stringify(students));
+        window.location.href = "viewstudents.html";
+    }
+
+
+
+
+        
+    </script>
+</body>
+</html>
