@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <header>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>    
+        <a href="addstudent.html">Add Student</a>    
+        <a href="viewstudents.html">View Students</a>     
+        <a href="logout.html">Logout</a>    
+    </nav>
+    </header>
+    
+    <h1>Edit Details</h1><hr>
+    <form onsubmit="update()" class="form">
+    <label for="username">Name: </label>
+    <input type="text" name="name" id="username" required/><br><br>
+    <label for="rollno">Roll No: </label>
+    <input type="text" name="rollno" id="rollno" required/><br><br>
+    <label for="cgpa">CGPA: </label>
+    <input type="number" name="cgpa" id="cgpa" required/><br><br>
+    <label for="branch">Branch: </label>
+    <input type="text" name="branch" id="branch" required/><br><br>
+    <button type="submit">Update</button>
+    </form>
+    <script>
+    async function editvalue() {
+    let params = new URLSearchParams(window.location.search);
+    let id = params.get("id");
+    let response = await fetch(`http://localhost:3000/students/${id}`);
+    let student = await response.json();
+
+    document.getElementById('username').value = student.name;
+    document.getElementById('rollno').value = student.rollno;
+    document.getElementById('cgpa').value = student.cgpa;
+    document.getElementById('branch').value = student.branch;
+
+}
+
+editvalue();
+async function update() {
+    event.preventDefault();
+    let username=document.getElementById('username').value;
+    let rollno=document.getElementById('rollno').value;
+    let cgpa=document.getElementById('cgpa').value;
+    let branch=document.getElementById('branch').value;
+    let params=new URLSearchParams(window.location.search);
+    let id=params.get("id");
+    let response=await fetch(`http://localhost:3000/students/${id}`,{
+        method:"PATCH",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            name:username,
+            rollno:rollno,
+            cgpa:cgpa,
+            branch:branch
+        })
+    
+    })
+    
+    
+}
+        
+    </script>
+</body>
+</html>

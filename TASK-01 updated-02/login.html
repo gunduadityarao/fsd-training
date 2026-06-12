@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <header>
+    <nav>
+        <a href="index.html">Home</a>     <a href="login.html">Login</a>     <a href="register.html">Register</a>     
+    </nav>
+    </header>
+    <h1>Login Page</h1>
+    <hr>
+    <br>
+    <form onsubmit="valid()" class="form">
+    <label for="username">Username: </label>
+    <input type="text" name="username" placeholder="Enter Username" id="username" required/><br><br>
+    <label for="password">Password: </label>
+    <input type="password" name="password" placeholder="Enter Password" id="password" required/><br><br>
+    <button type="submit">login</button><br><br><br>
+    <small>
+        Don't have an account? <a href="register.html">click here to register</a>
+    </small>
+    </form>
+    <script>
+        
+        async function valid(){
+            event.preventDefault();
+            let response=await fetch('http://localhost:3000/users');
+            let users=await response.json();
+            let uname=document.getElementById('username').value;
+            let pass=document.getElementById('password').value;
+            let valid=users.some(s=>s.username===uname && s.password===pass);
+            if(valid){
+                alert('login successful');
+                window.location.href="dashboard.html";
+            }
+            else{
+                alert('login failed');
+            }
+        }
+    </script>
+</body>
+</html>

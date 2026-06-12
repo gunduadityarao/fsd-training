@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <style>
+        table{
+            border-collapse: collapse;
+            font-size: 18px;
+            margin-top: 70px;
+        }
+        td{
+            padding:3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+        <a href="dashboard.html">Dashboard</a>    
+        <a href="addstudent.html">Add Student</a>    
+        <a href="viewstudents.html">View Students</a>     
+        <a href="logout.html">Logout</a>    
+    </nav>
+    </header>
+    
+    <h1>View Students</h1>
+    <hr>
+    <div style="margin-left: 500px;">
+    <table style="width: 500px;">
+        <th>
+            <tr>
+                <td>Name</td>
+                <td>Rollno</td>
+                <td>CGPA</td>
+                <td>Branch</td>
+                <td></td>
+            </tr>
+            
+        </th>
+        <tbody id="tbody">
+            
+
+            
+        </tbody>
+    </table>
+    </div>
+    <script>
+        async function viewstudents(){
+        let response=await fetch('http://localhost:3000/students');
+        let students=await response.json();
+
+        let tbody=document.getElementById('tbody');
+        students.map((student,index)=>{
+        tbody.innerHTML+=`
+            <tr>
+            <td>${student.name}</td>
+            <td>${student.rollno}</td>
+            <td>${student.cgpa}</td>
+            <td>${student.branch}</td>
+            <td><a href="editvalue.html?id=${student.id}">edit</a></td>
+            </tr>
+            
+            `;
+            })
+            }
+            viewstudents();
+    </script>
+</body>
+</html>

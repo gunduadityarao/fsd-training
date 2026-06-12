@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <header>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>    
+        <a href="addstudent.html">Add Student</a>    
+        <a href="viewstudents.html">View Students</a>     
+        <a href="logout.html">Logout</a>    
+    </nav>
+    </header>
+    <h1>Add Student</h1><hr>
+    <form onsubmit="addstudent()" class="form">
+    <label for="username">Name: </label>
+    <input type="text" name="name" placeholder="Enter name" id="username" required/><br><br>
+    <label for="rollno">Roll No: </label>
+    <input type="text" name="rollno" placeholder="Enter Roll No" id="rollno" required/><br><br>
+    <label for="cgpa">CGPA: </label>
+    <input type="number" name="cgpa" placeholder="Enter CGPA" id="cgpa" required/><br><br>
+    <label for="branch">Branch: </label>
+    <input type="text" name="branch" placeholder="Enter Branch" id="branch" required/><br><br>
+    <button type="submit">Add Student</button>
+    </form>
+    <script>
+        async function addstudent(){
+        let username=document.getElementById('username').value;
+        let rollno=document.getElementById('rollno').value;
+        let cgpa=document.getElementById('cgpa').value;
+        let branch=document.getElementById('branch').value;
+        let id=1;
+         await fetch('http://localhost:3000/students',{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                id:id++,
+                name:username,
+                rollno:rollno,
+                cgpa:cgpa,
+                branch:branch
+            })
+        })
+        alert('student added');
+        
+    }
+        
+    </script>
+</body>
+</html>
