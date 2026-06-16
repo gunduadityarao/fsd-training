@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        input{
+            border:1px solid black;
+            border-radius: 5px;
+            height: 25px;
+            width:200px;
+            box-sizing: border-box;
+            padding:10px;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        body{
+            background:linear-gradient(to bottom right,orange,yellow,orange);
+            min-height:100vh;
+        }
+        button{
+            background-color: green;
+            width: 100px;
+            height: 30px;
+            color: white;
+            border:0px;
+            border-radius: 10px;
+
+        }
+        button:hover{
+            transform:scale(1.05);
+            cursor:pointer;
+            transition:all 0.5s;
+
+        }
+        .card{
+            margin:40px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            border: none;
+            box-shadow: 0px 2px 4px rgb(244, 170, 170);
+            width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            height: auto;
+            
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Weather</h1>
+    <label for="cityname">City Name : </label>
+    <input type="text" name="cityname" id="cityname" autofocus><br>
+    <button type="button" onclick="display()">display</button>
+    </div>
+    
+    <div class="container">
+    <div id="data" class="card"></div>
+    </div>
+    <canvas id="weatherChart"></canvas>
+    <script>
+        let mychart;
+        function display(){
+        let city=document.getElementById('cityname').value;
+        let apikey='1af9f3ad815d8c64d2211f6c2466b7c5';
+        let wdata=document.getElementById('data');
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;
+        fetch(url)
+        .then(response=>{
+            return response.json();
+        })
+        .then(data=>{
+            wdata.innerHTML=`<h5>City name: ${data.name}</h5>
+            <h5>Temperature: ${data.main.temp}°C</h5>
+            <h5>Humidity: ${data.main.humidity}</h5>
+            <h5>Wind: ${data.wind.speed}</h5>
+            `;
+
+let ctx=document.getElementById("weatherChart");
+if(mychart){
+    mychart.destroy();
+}
+mychart=new Chart(ctx,{
+    type:'bar',
+    data:{
+        labels:["Temperature","Humidity","Wind"],
+        datasets:[{
+            label:"Weather Data",
+            data:[
+                data.main.temp,
+                data.main.humidity,
+                data.wind.speed
+            ]
+        }]
+    }
+});
+
+})
+.catch(err=>{
+alert("failed");
+});
+
+}
+    </script>
+</body>
+</html>
